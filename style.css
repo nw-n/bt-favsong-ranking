@@ -34,6 +34,8 @@ h1 {
   font-weight: bold;
   margin-bottom: 12px;
   cursor: pointer;
+
+  word-break: break-word;
 }
 
 .song-button:hover {
