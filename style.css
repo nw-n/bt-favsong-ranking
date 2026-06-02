@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  max-width: 500px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 24px;
 }
@@ -47,8 +47,8 @@ h1 {
 
 .vs {
   text-align: center;
-  font-size: 2rem;
   font-weight: bold;
+  font-size: 2rem;
   color: #d81b60;
 }
 
@@ -76,12 +76,12 @@ h1 {
 .song-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
 }
 
 .song-row .song-button {
   flex: 1;
-  margin-bottom: 0;
+  height: 120px;
 
   display: flex;
   align-items: center;
