@@ -74,13 +74,13 @@ h1 {
 
 .song-row {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 20px;
 }
 
 .song-row .song-button {
   flex: 1;
-  height: 120px;
+  height: 140px;
 
   display: flex;
   align-items: center;
