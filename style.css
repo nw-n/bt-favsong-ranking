@@ -75,7 +75,7 @@ h1 {
 .song-row {
   display: flex;
   align-items: stretch;
-  gap: 20px;
+  gap: 10px;
 }
 
 .song-row .song-button {
@@ -89,5 +89,10 @@ h1 {
 }
 
 .song-row .vs {
-  margin: 0;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #d81b60;
+
+  display: flex;
+  align-items: center;
 }
