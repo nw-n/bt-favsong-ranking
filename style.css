@@ -36,6 +36,8 @@ h1 {
   font-weight: bold;
   margin-bottom: 12px;
   cursor: pointer;
+  white-space: normal;
+  overflow-wrap: break-word;
 
   word-break: break-word;
 }
@@ -44,12 +46,6 @@ h1 {
   background: #fff0f5;
 }
 
-.vs {
-  text-align: center;
-  font-weight: bold;
-  font-size: 2rem;
-  color: #d81b60;
-}
 
 .sub-buttons {
   margin-top: 24px;
@@ -80,12 +76,13 @@ h1 {
 
 .song-row .song-button {
   flex: 1;
-  height: 140px;
+  min-height: 140px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  padding:12px;
 }
 
 .song-row .vs {
