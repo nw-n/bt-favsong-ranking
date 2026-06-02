@@ -67,3 +67,18 @@ h1 {
 .sub-buttons button:hover {
   background: #fff0f5;
 }
+
+.song-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.song-row .song-button {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.song-row .vs {
+  margin: 0;
+}
