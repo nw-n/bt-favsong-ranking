@@ -80,6 +80,7 @@ leftSong.addEventListener("click", () => {
 
   currentLeft.rating += 10;
   currentRight.rating -= 10;
+  
   matchCount++;
   updateProgress();
 
@@ -94,6 +95,7 @@ rightSong.addEventListener("click", () => {
 
   currentRight.rating += 10;
   currentLeft.rating -= 10;
+  
   matchCount++;
   updateProgress();
 
