@@ -87,17 +87,52 @@ function showResults() {
 
   let rankingHTML = "";
 
-  sortedSongs.forEach((song, index) => {
+  for (let i = 3; i < Math.min(20, sortedSongs.length); i++) {
     rankingHTML += `
       <p>
-        ${index + 1}位　
-        ${song.name}
-        (${Math.round(song.rating)})
+        ${i + 1}位　
+        ${sortedSongs[i].name}
       </p>
     `;
-  });
+  }
+
+  if (sortedSongs.length > 20) {
+    rankingHTML += `
+      <button id="showMoreRanking">
+        もっと表示
+      </button>
+
+      <div id="more-ranking" style="display:none;">
+    `;
+
+    for (let i = 20; i < sortedSongs.length; i++) {
+      rankingHTML += `
+        <p>
+          ${i + 1}位　
+          ${sortedSongs[i].name}
+        </p>
+      `;
+    }
+
+    rankingHTML += `
+      </div>
+    `;
+  }
 
   fullRanking.innerHTML = rankingHTML;
+
+  const showMoreButton =
+    document.getElementById("showMoreRanking");
+
+  const moreRanking =
+    document.getElementById("more-ranking");
+
+  if (showMoreButton && moreRanking) {
+    showMoreButton.addEventListener("click", () => {
+      moreRanking.style.display = "block";
+      showMoreButton.style.display = "none";
+    });
+  }
 }
 
 function checkEnd() {
