@@ -168,10 +168,12 @@ function showResults() {
   });
 
   fullRanking.innerHTML = rankingHTML;
+  
+}
 
-  function checkEnd() {
+function checkEnd() {
 
-  if (matchCount >= MAX_MATCHES) {
+ if (matchCount >= MAX_MATCHES) {
 
     showResults();
 
