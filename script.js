@@ -42,6 +42,14 @@ const rightSong = document.getElementById("rightSong");
 let currentLeft;
 let currentRight;
 
+let matchCount = 0;
+
+const progressText =
+  document.getElementById("progress-text");
+
+const progressFill =
+  document.getElementById("progress-fill");
+
 function nextMatch() {
 
   currentLeft =
@@ -56,10 +64,24 @@ function nextMatch() {
 rightSong.textContent = currentRight.name;
 }
 
+function updateProgress() {
+
+  progressText.textContent =
+    `${matchCount} / ${MAX_MATCHES}`;
+
+  const percent =
+    (matchCount / MAX_MATCHES) * 100;
+
+  progressFill.style.width =
+    `${percent}%`;
+}
+
 leftSong.addEventListener("click", () => {
 
   currentLeft.rating += 10;
   currentRight.rating -= 10;
+  matchCount++;
+  updateProgress();
 
   console.log("左勝ち");
   console.log(currentLeft);
@@ -72,6 +94,8 @@ rightSong.addEventListener("click", () => {
 
   currentRight.rating += 10;
   currentLeft.rating -= 10;
+  matchCount++;
+  updateProgress();
 
   console.log("右勝ち");
   console.log(currentLeft);
@@ -94,6 +118,7 @@ startButton.addEventListener("click", () => {
 
   gameScreen.style.display = "block";
 
+  updateProgress();
   nextMatch();
 
 });
