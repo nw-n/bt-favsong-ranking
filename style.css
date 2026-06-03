@@ -14,8 +14,18 @@ body {
 
 h1 {
   text-align: center;
-  color: #e48fb1;
-  margin-bottom: 8px;
+  color: #ff6fa5;
+
+  font-size: 2.3rem;
+  font-weight: 900;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 24px;
+
+  text-shadow:
+    2px 2px 0 #ffffff,
+    0 0 12px rgba(255, 111, 165, 0.4);
 }
 
 .subtitle {
