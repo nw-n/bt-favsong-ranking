@@ -183,6 +183,20 @@ bothLikeButton.addEventListener("click", () => {
   finishOneMatch();
 });
 
+backToStart.addEventListener("click", () => {
+  songs.forEach(song => {
+    song.rating = 1500;
+    song.unknownCount = 0;
+  });
+
+  matchCount = 0;
+  updateProgress();
+
+  resultScreen.style.display = "none";
+  gameScreen.style.display = "none";
+  startScreen.style.display = "block";
+});
+
 startButton.addEventListener("click", () => {
   const selectedDifficulty = document.querySelector(
     'input[name="difficulty"]:checked'
