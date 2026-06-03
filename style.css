@@ -26,6 +26,8 @@ h1 {
   text-shadow:
     2px 2px 0 #ffffff,
     0 0 12px rgba(255, 111, 165, 0.4);
+  
+  font-family: "M PLUS Rounded 1c", sans-serif;
 }
 
 .subtitle {
