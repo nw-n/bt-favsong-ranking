@@ -60,6 +60,9 @@ const unknownRightButton =
 const unknownBothButton =
   document.getElementById("unknownBoth");
 
+const drawButton =
+  document.getElementById("draw");
+
 let currentLeft;
 let currentRight;
 
@@ -170,6 +173,20 @@ unknownBothButton.addEventListener("click", () => {
 
   matchCount++;
   updateProgress();
+  checkEnd();
+
+  if (matchCount < MAX_MATCHES) {
+    nextMatch();
+  }
+
+});
+
+drawButton.addEventListener("click", () => {
+
+  matchCount++;
+
+  updateProgress();
+
   checkEnd();
 
   if (matchCount < MAX_MATCHES) {
