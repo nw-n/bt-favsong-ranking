@@ -118,3 +118,69 @@ h1 {
   background: #f48fb1;
   transition: 0.3s;
 }
+#start-screen,
+#result-screen {
+  background: white;
+  border: 3px solid #f8bbd0;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(228, 143, 177, 0.18);
+}
+
+#start-screen h2,
+#result-screen h2 {
+  color: #d81b60;
+  text-align: center;
+}
+
+#start-screen ul {
+  background: #fff7fa;
+  border-radius: 16px;
+  padding: 18px 18px 18px 34px;
+  line-height: 1.8;
+}
+
+#startButton {
+  width: 100%;
+  border: none;
+  border-radius: 999px;
+  background: #f48fb1;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 16px;
+  cursor: pointer;
+}
+
+#startButton:hover {
+  background: #ec6f9f;
+}
+
+#top3 h3 {
+  background: #fff7fa;
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+#top3 h3:nth-child(1) {
+  border: 3px solid #f6c453;
+  background: #fff8dc;
+}
+
+#top3 h3:nth-child(2) {
+  border: 3px solid #c0c0c0;
+  background: #f7f7f7;
+}
+
+#top3 h3:nth-child(3) {
+  border: 3px solid #cd7f32;
+  background: #fff1e6;
+}
+
+#full-ranking p {
+  background: #fff7fa;
+  border-radius: 12px;
+  padding: 10px 14px;
+}
