@@ -19,6 +19,7 @@ const bothLikeButton = document.getElementById("bothLike");
 const progressText = document.getElementById("progress-text");
 const progressFill = document.getElementById("progress-fill");
 
+const backToTopGame = document.getElementById("backToTopGame");
 const backToStart = document.getElementById("backToStart");
 
 let MAX_MATCHES = 500;
@@ -181,6 +182,20 @@ bothLikeButton.addEventListener("click", () => {
   currentLeft.rating += 5;
   currentRight.rating += 5;
   finishOneMatch();
+});
+
+backToTopGame.addEventListener("click", () => {
+
+  const ok = confirm(
+    "ランキングを中断してトップに戻りますか？"
+  );
+
+  if (!ok) return;
+
+  resultScreen.style.display = "none";
+  gameScreen.style.display = "none";
+  startScreen.style.display = "block";
+
 });
 
 backToStart.addEventListener("click", () => {
