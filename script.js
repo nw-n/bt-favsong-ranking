@@ -41,8 +41,8 @@ function nextMatch() {
       songs[Math.floor(Math.random() * songs.length)];
   } while (currentRight === currentLeft);
 
-  leftSong.textContent = currentLeft;
-  rightSong.textContent = currentRight;
+  leftSong.textContent = currentLeft.name;
+rightSong.textContent = currentRight.name;
 }
 
 leftSong.addEventListener("click", () => {
