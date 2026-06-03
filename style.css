@@ -210,6 +210,22 @@ h1 {
   font-weight: bold;
 
   padding: 14px;
+}  
+  #backToTopGame {
+  width: 100%;
+  margin-top: 16px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #ffd6e7;
+  color: #d81b60;
+
+  font-weight: bold;
+  padding: 12px;
+
+  cursor: pointer;
+}
 
   cursor: pointer;
 }
