@@ -1,288 +1,82 @@
-const startScreen =
-  document.getElementById("start-screen");
+const startScreen = document.getElementById("start-screen");
+const gameScreen = document.getElementById("game-screen");
+const startButton = document.getElementById("startButton");
 
-const gameScreen =
-  document.getElementById("game-screen");
+const resultScreen = document.getElementById("result-screen");
+const top3 = document.getElementById("top3");
+const fullRanking = document.getElementById("full-ranking");
 
-const startButton =
-  document.getElementById("startButton");
-
-const resultScreen =
-  document.getElementById("result-screen");
-
-const top3 =
-  document.getElementById("top3");
-
-const fullRanking =
-  document.getElementById("full-ranking");
-
-let MAX_MATCHES = 500;
-
-const songs = [
-  {
-    name: "TRAIN",
-    rating: 1500,
-    unknownCount: 0
-  },
-  {
-    name: "No More Cry",
-    rating: 1500,
-    unknownCount: 0
-  },
-  {
-    name: "Shake body",
-    rating: 1500,
-    unknownCount: 0
-  },
-  {
-    name: "Secret Express",
-    rating: 1500,
-    unknownCount: 0
-  },
-  {
-    name: "pani pani",
-    rating: 1500,
-    unknownCount: 0
-  }
-];
 const leftSong = document.getElementById("leftSong");
 const rightSong = document.getElementById("rightSong");
 
-const skipButton =
-  document.getElementById("skip");
+const skipButton = document.getElementById("skip");
+const unknownLeftButton = document.getElementById("unknownLeft");
+const unknownRightButton = document.getElementById("unknownRight");
+const unknownBothButton = document.getElementById("unknownBoth");
+const drawButton = document.getElementById("draw");
+const bothLikeButton = document.getElementById("bothLike");
 
-const unknownLeftButton =
-  document.getElementById("unknownLeft");
+const progressText = document.getElementById("progress-text");
+const progressFill = document.getElementById("progress-fill");
 
-const unknownRightButton =
-  document.getElementById("unknownRight");
-
-const unknownBothButton =
-  document.getElementById("unknownBoth");
-
-const drawButton =
-  document.getElementById("draw");
-
-const bothLikeButton =
-  document.getElementById("bothLike");
-
+let MAX_MATCHES = 500;
+let matchCount = 0;
 let currentLeft;
 let currentRight;
 
-let matchCount = 0;
-
-const progressText =
-  document.getElementById("progress-text");
-
-const progressFill =
-  document.getElementById("progress-fill");
+const songs = [
+  { name: "TRAIN", rating: 1500, unknownCount: 0 },
+  { name: "No More Cry", rating: 1500, unknownCount: 0 },
+  { name: "Shake body", rating: 1500, unknownCount: 0 },
+  { name: "Secret Express", rating: 1500, unknownCount: 0 },
+  { name: "pani pani", rating: 1500, unknownCount: 0 }
+];
 
 function nextMatch() {
-
-  currentLeft =
-    songs[Math.floor(Math.random() * songs.length)];
+  currentLeft = songs[Math.floor(Math.random() * songs.length)];
 
   do {
-    currentRight =
-      songs[Math.floor(Math.random() * songs.length)];
+    currentRight = songs[Math.floor(Math.random() * songs.length)];
   } while (currentRight.name === currentLeft.name);
 
   leftSong.textContent = currentLeft.name;
-rightSong.textContent = currentRight.name;
+  rightSong.textContent = currentRight.name;
 }
 
 function updateProgress() {
+  progressText.textContent = `${matchCount} / ${MAX_MATCHES}`;
 
-  progressText.textContent =
-    `${matchCount} / ${MAX_MATCHES}`;
-
-  const percent =
-    (matchCount / MAX_MATCHES) * 100;
-
-  progressFill.style.width =
-    `${percent}%`;
-}
-
-leftSong.addEventListener("click", () => {
-
-  currentLeft.rating += 10;
-  currentRight.rating -= 10;
-  
-  matchCount++;
-
-updateProgress();
-
-function updateProgress() {
-
-  progressText.textContent =
-    `${matchCount} / ${MAX_MATCHES}`;
-
-  const percent =
-    (matchCount / MAX_MATCHES) * 100;
-
-  progressFill.style.width =
-    `${percent}%`;
+  const percent = (matchCount / MAX_MATCHES) * 100;
+  progressFill.style.width = `${percent}%`;
 }
 
 function updateElo(winner, loser) {
-
   const K = 32;
 
   const expectedWinner =
-    1 / (1 + Math.pow(10,
-      (loser.rating - winner.rating) / 400));
+    1 / (1 + Math.pow(10, (loser.rating - winner.rating) / 400));
 
   const expectedLoser =
-    1 / (1 + Math.pow(10,
-      (winner.rating - loser.rating) / 400));
+    1 / (1 + Math.pow(10, (winner.rating - loser.rating) / 400));
 
-  winner.rating +=
-    K * (1 - expectedWinner);
-
-  loser.rating +=
-    K * (0 - expectedLoser);
-
+  winner.rating += K * (1 - expectedWinner);
+  loser.rating += K * (0 - expectedLoser);
 }
 
-function checkEnd() {
+function finishOneMatch() {
+  matchCount++;
+  updateProgress();
+  checkEnd();
 
-  if (matchCount >= MAX_MATCHES) {
-
-    showResults();
-
+  if (matchCount < MAX_MATCHES) {
+    nextMatch();
   }
-
 }
-  
-checkEnd();
-
-if (matchCount < MAX_MATCHES) {
-  nextMatch();
-}
-});
-
-rightSong.addEventListener("click", () => {
-
-  currentRight.rating += 10;
-  currentLeft.rating -= 10;
-  
-  matchCount++;
-
-updateProgress();
-
-checkEnd();
-
-if (matchCount < MAX_MATCHES) {
-  nextMatch();
-}
-});
-
-skipButton.addEventListener("click", () => {
-
-  nextMatch();
-
-});
-
-unknownLeftButton.addEventListener("click", () => {
-
-  currentLeft.unknownCount++;
-
-  matchCount++;
-  updateProgress();
-  checkEnd();
-
-  if (matchCount < MAX_MATCHES) {
-    nextMatch();
-  }
-
-});
-
-unknownRightButton.addEventListener("click", () => {
-
-  currentRight.unknownCount++;
-
-  matchCount++;
-  updateProgress();
-  checkEnd();
-
-  if (matchCount < MAX_MATCHES) {
-    nextMatch();
-  }
-
-});
-
-unknownBothButton.addEventListener("click", () => {
-
-  currentLeft.unknownCount++;
-  currentRight.unknownCount++;
-
-  matchCount++;
-  updateProgress();
-  checkEnd();
-
-  if (matchCount < MAX_MATCHES) {
-    nextMatch();
-  }
-
-});
-
-drawButton.addEventListener("click", () => {
-
-  matchCount++;
-
-  updateProgress();
-
-  checkEnd();
-
-  if (matchCount < MAX_MATCHES) {
-    nextMatch();
-  }
-
-});
-
-bothLikeButton.addEventListener("click", () => {
-
-  currentLeft.rating += 5;
-  currentRight.rating += 5;
-
-  matchCount++;
-  updateProgress();
-  checkEnd();
-
-  if (matchCount < MAX_MATCHES) {
-    nextMatch();
-  }
-
-});
-
-startButton.addEventListener("click", () => {
-
-  const selectedDifficulty =
-    document.querySelector(
-      'input[name="difficulty"]:checked'
-    );
-
-  MAX_MATCHES =
-    Number(selectedDifficulty.value);
-
-  startScreen.style.display = "none";
-
-  gameScreen.style.display = "block";
-
-  updateProgress();
-  nextMatch();
-  
-});
 
 function showResults() {
-
-  const sortedSongs =
-    [...songs].sort(
-      (a, b) => b.rating - a.rating
-    );
+  const sortedSongs = [...songs].sort((a, b) => b.rating - a.rating);
 
   gameScreen.style.display = "none";
-
   resultScreen.style.display = "block";
 
   top3.innerHTML = `
@@ -294,27 +88,76 @@ function showResults() {
   let rankingHTML = "";
 
   sortedSongs.forEach((song, index) => {
-
     rankingHTML += `
       <p>
         ${index + 1}位　
         ${song.name}
-        (${song.rating})
+        (${Math.round(song.rating)})
       </p>
     `;
-
   });
 
   fullRanking.innerHTML = rankingHTML;
-  
 }
 
 function checkEnd() {
-
- if (matchCount >= MAX_MATCHES) {
-
+  if (matchCount >= MAX_MATCHES) {
     showResults();
-
   }
-
 }
+
+leftSong.addEventListener("click", () => {
+  updateElo(currentLeft, currentRight);
+  finishOneMatch();
+});
+
+rightSong.addEventListener("click", () => {
+  updateElo(currentRight, currentLeft);
+  finishOneMatch();
+});
+
+skipButton.addEventListener("click", () => {
+  nextMatch();
+});
+
+unknownLeftButton.addEventListener("click", () => {
+  currentLeft.unknownCount++;
+  finishOneMatch();
+});
+
+unknownRightButton.addEventListener("click", () => {
+  currentRight.unknownCount++;
+  finishOneMatch();
+});
+
+unknownBothButton.addEventListener("click", () => {
+  currentLeft.unknownCount++;
+  currentRight.unknownCount++;
+  finishOneMatch();
+});
+
+drawButton.addEventListener("click", () => {
+  finishOneMatch();
+});
+
+bothLikeButton.addEventListener("click", () => {
+  currentLeft.rating += 5;
+  currentRight.rating += 5;
+  finishOneMatch();
+});
+
+startButton.addEventListener("click", () => {
+  const selectedDifficulty = document.querySelector(
+    'input[name="difficulty"]:checked'
+  );
+
+  MAX_MATCHES = Number(selectedDifficulty.value);
+  matchCount = 0;
+
+  startScreen.style.display = "none";
+  resultScreen.style.display = "none";
+  gameScreen.style.display = "block";
+
+  updateProgress();
+  nextMatch();
+});
