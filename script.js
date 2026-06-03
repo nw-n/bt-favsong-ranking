@@ -51,6 +51,15 @@ const rightSong = document.getElementById("rightSong");
 const skipButton =
   document.getElementById("skip");
 
+const unknownLeftButton =
+  document.getElementById("unknownLeft");
+
+const unknownRightButton =
+  document.getElementById("unknownRight");
+
+const unknownBothButton =
+  document.getElementById("unknownBoth");
+
 let currentLeft;
 let currentRight;
 
@@ -123,6 +132,49 @@ if (matchCount < MAX_MATCHES) {
 skipButton.addEventListener("click", () => {
 
   nextMatch();
+
+});
+
+unknownLeftButton.addEventListener("click", () => {
+
+  currentLeft.unknownCount++;
+
+  matchCount++;
+  updateProgress();
+  checkEnd();
+
+  if (matchCount < MAX_MATCHES) {
+    nextMatch();
+  }
+
+});
+
+unknownRightButton.addEventListener("click", () => {
+
+  currentRight.unknownCount++;
+
+  matchCount++;
+  updateProgress();
+  checkEnd();
+
+  if (matchCount < MAX_MATCHES) {
+    nextMatch();
+  }
+
+});
+
+unknownBothButton.addEventListener("click", () => {
+
+  currentLeft.unknownCount++;
+  currentRight.unknownCount++;
+
+  matchCount++;
+  updateProgress();
+  checkEnd();
+
+  if (matchCount < MAX_MATCHES) {
+    nextMatch();
+  }
 
 });
 
