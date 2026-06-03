@@ -11,11 +11,32 @@ const songs = [
   "Make it hot!"
 ];
 
-function getRandomSong() {
-  return songs[Math.floor(Math.random() * songs.length)];
+const leftSong = document.getElementById("leftSong");
+const rightSong = document.getElementById("rightSong");
+
+let currentLeft;
+let currentRight;
+
+function nextMatch() {
+
+  currentLeft =
+    songs[Math.floor(Math.random() * songs.length)];
+
+  do {
+    currentRight =
+      songs[Math.floor(Math.random() * songs.length)];
+  } while (currentRight === currentLeft);
+
+  leftSong.textContent = currentLeft;
+  rightSong.textContent = currentRight;
 }
 
-const buttons = document.querySelectorAll(".song-button");
+leftSong.addEventListener("click", () => {
+  nextMatch();
+});
 
-buttons[0].textContent = getRandomSong();
-buttons[1].textContent = getRandomSong();
+rightSong.addEventListener("click", () => {
+  nextMatch();
+});
+
+nextMatch();
