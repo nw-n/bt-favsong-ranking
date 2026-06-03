@@ -134,6 +134,8 @@ startButton.addEventListener("click", () => {
   updateProgress();
   nextMatch();
   
+});
+
 function showResults() {
 
   const sortedSongs =
@@ -176,5 +178,3 @@ function showResults() {
   }
 
 }
-}
-});
