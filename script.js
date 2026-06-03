@@ -7,6 +7,15 @@ const gameScreen =
 const startButton =
   document.getElementById("startButton");
 
+const resultScreen =
+  document.getElementById("result-screen");
+
+const top3 =
+  document.getElementById("top3");
+
+const fullRanking =
+  document.getElementById("full-ranking");
+
 let MAX_MATCHES = 500;
 
 const songs = [
@@ -82,13 +91,14 @@ leftSong.addEventListener("click", () => {
   currentRight.rating -= 10;
   
   matchCount++;
-  updateProgress();
 
-  console.log("左勝ち");
-  console.log(currentLeft);
-  console.log(currentRight);
+updateProgress();
 
+checkEnd();
+
+if (matchCount < MAX_MATCHES) {
   nextMatch();
+}
 });
 
 rightSong.addEventListener("click", () => {
@@ -97,13 +107,14 @@ rightSong.addEventListener("click", () => {
   currentLeft.rating -= 10;
   
   matchCount++;
-  updateProgress();
 
-  console.log("右勝ち");
-  console.log(currentLeft);
-  console.log(currentRight);
+updateProgress();
 
+checkEnd();
+
+if (matchCount < MAX_MATCHES) {
   nextMatch();
+}
 });
 
 startButton.addEventListener("click", () => {
@@ -122,5 +133,48 @@ startButton.addEventListener("click", () => {
 
   updateProgress();
   nextMatch();
+  
+function showResults() {
 
+  const sortedSongs =
+    [...songs].sort(
+      (a, b) => b.rating - a.rating
+    );
+
+  gameScreen.style.display = "none";
+
+  resultScreen.style.display = "block";
+
+  top3.innerHTML = `
+    <h3>🥇 ${sortedSongs[0].name}</h3>
+    <h3>🥈 ${sortedSongs[1].name}</h3>
+    <h3>🥉 ${sortedSongs[2].name}</h3>
+  `;
+
+  let rankingHTML = "";
+
+  sortedSongs.forEach((song, index) => {
+
+    rankingHTML += `
+      <p>
+        ${index + 1}位　
+        ${song.name}
+        (${song.rating})
+      </p>
+    `;
+
+  });
+
+  fullRanking.innerHTML = rankingHTML;
+
+  function checkEnd() {
+
+  if (matchCount >= MAX_MATCHES) {
+
+    showResults();
+
+  }
+
+}
+}
 });
