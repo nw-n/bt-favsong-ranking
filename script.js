@@ -1,3 +1,14 @@
+const startScreen =
+  document.getElementById("start-screen");
+
+const gameScreen =
+  document.getElementById("game-screen");
+
+const startButton =
+  document.getElementById("startButton");
+
+let MAX_MATCHES = 500;
+
 const songs = [
   {
     name: "TRAIN",
@@ -69,4 +80,20 @@ rightSong.addEventListener("click", () => {
   nextMatch();
 });
 
-nextMatch();
+startButton.addEventListener("click", () => {
+
+  const selectedDifficulty =
+    document.querySelector(
+      'input[name="difficulty"]:checked'
+    );
+
+  MAX_MATCHES =
+    Number(selectedDifficulty.value);
+
+  startScreen.style.display = "none";
+
+  gameScreen.style.display = "block";
+
+  nextMatch();
+
+});
