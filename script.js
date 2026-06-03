@@ -68,3 +68,5 @@ rightSong.addEventListener("click", () => {
 
   nextMatch();
 });
+
+nextMatch();
