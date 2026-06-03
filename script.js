@@ -48,6 +48,9 @@ const songs = [
 const leftSong = document.getElementById("leftSong");
 const rightSong = document.getElementById("rightSong");
 
+const skipButton =
+  document.getElementById("skip");
+
 let currentLeft;
 let currentRight;
 
@@ -115,6 +118,12 @@ checkEnd();
 if (matchCount < MAX_MATCHES) {
   nextMatch();
 }
+});
+
+skipButton.addEventListener("click", () => {
+
+  nextMatch();
+
 });
 
 startButton.addEventListener("click", () => {
