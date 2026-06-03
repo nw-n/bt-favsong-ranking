@@ -112,6 +112,48 @@ leftSong.addEventListener("click", () => {
 
 updateProgress();
 
+function updateProgress() {
+
+  progressText.textContent =
+    `${matchCount} / ${MAX_MATCHES}`;
+
+  const percent =
+    (matchCount / MAX_MATCHES) * 100;
+
+  progressFill.style.width =
+    `${percent}%`;
+}
+
+function updateElo(winner, loser) {
+
+  const K = 32;
+
+  const expectedWinner =
+    1 / (1 + Math.pow(10,
+      (loser.rating - winner.rating) / 400));
+
+  const expectedLoser =
+    1 / (1 + Math.pow(10,
+      (winner.rating - loser.rating) / 400));
+
+  winner.rating +=
+    K * (1 - expectedWinner);
+
+  loser.rating +=
+    K * (0 - expectedLoser);
+
+}
+
+function checkEnd() {
+
+  if (matchCount >= MAX_MATCHES) {
+
+    showResults();
+
+  }
+
+}
+  
 checkEnd();
 
 if (matchCount < MAX_MATCHES) {
