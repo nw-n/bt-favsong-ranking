@@ -46,11 +46,25 @@ rightSong.textContent = currentRight.name;
 }
 
 leftSong.addEventListener("click", () => {
+
+  currentLeft.rating += 10;
+  currentRight.rating -= 10;
+
+  console.log("左勝ち");
+  console.log(currentLeft);
+  console.log(currentRight);
+
   nextMatch();
 });
 
 rightSong.addEventListener("click", () => {
+
+  currentRight.rating += 10;
+  currentLeft.rating -= 10;
+
+  console.log("右勝ち");
+  console.log(currentLeft);
+  console.log(currentRight);
+
   nextMatch();
 });
-
-nextMatch();
