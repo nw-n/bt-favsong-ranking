@@ -1,16 +1,30 @@
 const songs = [
-  "TRAIN",
-  "No More Cry",
-  "Shake body",
-  "Secret Express",
-  "pani pani",
-  "POLICE MEN",
-  "Drive on week",
-  "FLASHBACK",
-  "Bloody Night",
-  "Make it hot!"
+  {
+    name: "TRAIN",
+    rating: 1500,
+    unknownCount: 0
+  },
+  {
+    name: "No More Cry",
+    rating: 1500,
+    unknownCount: 0
+  },
+  {
+    name: "Shake body",
+    rating: 1500,
+    unknownCount: 0
+  },
+  {
+    name: "Secret Express",
+    rating: 1500,
+    unknownCount: 0
+  },
+  {
+    name: "pani pani",
+    rating: 1500,
+    unknownCount: 0
+  }
 ];
-
 const leftSong = document.getElementById("leftSong");
 const rightSong = document.getElementById("rightSong");
 
