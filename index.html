@@ -17,8 +17,52 @@
     <p class="subtitle">
       178 Songs
     </p>
+ <div id="start-screen">
+
+  <h2>遊び方</h2>
+
+  <p>
+    好きな曲を選んで、自分だけの超特急楽曲ランキングを作ろう！
+  </p>
+
+  <ul>
+    <li>左右の曲から好きな方を選択</li>
+    <li>引き分けやどっちも好きも選択可能</li>
+    <li>選択回数に応じてランキングを作成</li>
+  </ul>
+
+  <h2>精度を選択</h2>
+
+  <label>
+    <input type="radio" name="difficulty" value="300" checked>
+    ライト（300問）
+  </label>
+
+  <br><br>
+
+  <label>
+    <input type="radio" name="difficulty" value="500">
+    スタンダード（500問）
+  </label>
+
+  <br><br>
+
+  <label>
+    <input type="radio" name="difficulty" value="700">
+    ガチ（700問）
+  </label>
+
+  <br><br>
+
+  <button id="startButton">
+    スタート！
+  </button>
+
+</div>   
     
- <div class="song-row">
+ <div id="game-screen" style="display:none;">
+   
+  <div class="song-row">
 
   <div class="song-button" id="leftSong">
     TRAIN
