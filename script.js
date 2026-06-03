@@ -39,7 +39,7 @@ function nextMatch() {
   do {
     currentRight =
       songs[Math.floor(Math.random() * songs.length)];
-  } while (currentRight === currentLeft);
+  } while (currentRight.name === currentLeft.name);
 
   leftSong.textContent = currentLeft.name;
 rightSong.textContent = currentRight.name;
