@@ -19,6 +19,8 @@ const bothLikeButton = document.getElementById("bothLike");
 const progressText = document.getElementById("progress-text");
 const progressFill = document.getElementById("progress-fill");
 
+const backToStart = document.getElementById("backToStart");
+
 let MAX_MATCHES = 500;
 let matchCount = 0;
 let currentLeft;
