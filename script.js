@@ -63,6 +63,9 @@ const unknownBothButton =
 const drawButton =
   document.getElementById("draw");
 
+const bothLikeButton =
+  document.getElementById("bothLike");
+
 let currentLeft;
 let currentRight;
 
@@ -187,6 +190,21 @@ drawButton.addEventListener("click", () => {
 
   updateProgress();
 
+  checkEnd();
+
+  if (matchCount < MAX_MATCHES) {
+    nextMatch();
+  }
+
+});
+
+bothLikeButton.addEventListener("click", () => {
+
+  currentLeft.rating += 5;
+  currentRight.rating += 5;
+
+  matchCount++;
+  updateProgress();
   checkEnd();
 
   if (matchCount < MAX_MATCHES) {
