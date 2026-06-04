@@ -65,32 +65,38 @@ h1 {
   cursor: pointer;
   transition: 0.2s;
 }
+
 .difficulty-card:hover {
   background: #fff7fa;
 }
+
+.difficulty-card input[type="radio"] {
+  transform: scale(1.2);
+  margin-right: 12px;
+}
+
+.difficulty-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .difficulty-title {
-  display: block;
   font-weight: bold;
   color: #d81b60;
   font-size: 1rem;
 }
+
 .difficulty-time {
-  display: block;
   margin-top: 4px;
   color: #888;
   font-size: 0.85rem;
 }
-.difficulty-card input[type="radio"] {
-  transform: scale(1.2);
-  margin-right: 8px;
-}
-.difficulty-info {
-  margin-left: 12px; 
-}
+
 .difficulty-card:has(input:checked) {
   background: #fff0f5;
   border-color: #ff6fa5;
 }
+
 .song-button:hover {
   background: #fff0f5;
 }
