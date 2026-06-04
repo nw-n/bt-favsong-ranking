@@ -18,10 +18,12 @@ const unknownRightButton = document.getElementById("unknownRight");
 const unknownBothButton = document.getElementById("unknownBoth");
 const drawButton = document.getElementById("draw");
 const bothLikeButton = document.getElementById("bothLike");
+const undoButton =document.getElementById("undoButton");
 
 const progressText = document.getElementById("progress-text");
 const progressFill = document.getElementById("progress-fill");
 
+let lastState = null;
 const backToTopGame = document.getElementById("backToTopGame");
 const backToStart = document.getElementById("backToStart");
 
@@ -80,6 +82,16 @@ function updateElo(winner, loser) {
   loser.rating += K * (0 - expectedLoser);
 }
 
+function saveState() {
+  lastState = {
+    ratings: songs.map(song => song.rating),
+    unknownCounts: songs.map(song => song.unknownCount),
+    matchCount: matchCount,
+    left: currentLeft,
+    right: currentRight
+  };
+}
+
 function finishOneMatch() {
   matchCount++;
   updateProgress();
@@ -89,7 +101,6 @@ function finishOneMatch() {
     nextMatch();
   }
 }
-
 function showResults() {
   const sortedSongs = [...songs].sort((a, b) => b.rating - a.rating);
 
@@ -173,52 +184,62 @@ function checkEnd() {
 }
 
 leftSong.addEventListener("click", () => {
+  saveState();
   updateElo(currentLeft, currentRight);
   finishOneMatch();
 });
 
 rightSong.addEventListener("click", () => {
+  saveState();
   updateElo(currentRight, currentLeft);
   finishOneMatch();
 });
 
 skipButton.addEventListener("click", () => {
+  saveState();
   nextMatch();
 });
 
 superLikeLeftButton.addEventListener("click", () => {
+  saveState();
   updateElo(currentLeft, currentRight);
   currentLeft.rating += 15;
   finishOneMatch();
 });
 
 superLikeRightButton.addEventListener("click", () => {
+  saveState();
   updateElo(currentRight, currentLeft);
   currentRight.rating += 15;
   finishOneMatch();
 });
 
 unknownLeftButton.addEventListener("click", () => {
+  saveState();
   currentLeft.unknownCount++;
   finishOneMatch();
 });
 
 unknownRightButton.addEventListener("click", () => {
+  saveState();
   currentRight.unknownCount++;
   finishOneMatch();
 });
 
 unknownBothButton.addEventListener("click", () => {
+  saveState();
   currentLeft.unknownCount++;
   currentRight.unknownCount++;
   finishOneMatch();
 });
 
 drawButton.addEventListener("click", () => {
+  saveState();
   finishOneMatch();
 });
 
 bothLikeButton.addEventListener("click", () => {
+  saveState();
   currentLeft.rating += 5;
   currentRight.rating += 5;
   finishOneMatch();
