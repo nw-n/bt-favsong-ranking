@@ -143,11 +143,11 @@ let rankingHTML = "";
 
   for (let i = 3; i < Math.min(20, sortedSongs.length); i++) {
     rankingHTML += `
-      <p>
-        ${i + 1}位　
-        ${sortedSongs[i].name}
-      </p>
-    `;
+  <p class="ranking-row">
+    <span>${i + 1}位　${sortedSongs[i].name}</span>
+    <span>${Math.round(sortedSongs[i].rating)}</span>
+  </p>
+`;
   }
 
   if (sortedSongs.length > 20) {
@@ -161,17 +161,10 @@ let rankingHTML = "";
 
     for (let i = 20; i < sortedSongs.length; i++) {
      rankingHTML += `
+  rankingHTML += `
   <p class="ranking-row">
-
-    <span>
-      ${i + 1}位
-      ${sortedSongs[i].name}
-    </span>
-
-    <span>
-      ${Math.round(sortedSongs[i].rating)}
-    </span>
-
+    <span>${i + 1}位　${sortedSongs[i].name}</span>
+    <span>${Math.round(sortedSongs[i].rating)}</span>
   </p>
 `;
     }
