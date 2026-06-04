@@ -85,10 +85,12 @@ h1 {
   margin-right: 8px;
 }
 .difficulty-info {
-  margin-left: 12px;
-  
+  margin-left: 12px; 
 }
-
+.difficulty-card:has(input:checked) {
+  background: #fff0f5;
+  border-color: #ff6fa5;
+}
 .song-button:hover {
   background: #fff0f5;
 }
