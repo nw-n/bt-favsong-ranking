@@ -137,6 +137,13 @@ h1 {
   color: #4a90e2;
   border-color: #b8dcff;
 }
+#superLikeLeft,
+#superLikeRight {
+  width: calc(50% - 6px);
+  background: #ffe4ef;
+  color: #d81b60;
+  border-color: #ff9fc5;
+}
 
 .sub-buttons button:hover {
   background: #fff0f5;
