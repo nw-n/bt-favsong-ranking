@@ -229,3 +229,21 @@ h1 {
 
   cursor: pointer;
 }
+.recognition-card {
+  background: #fff7fa;
+  border: 2px solid #f8bbd0;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 18px 0;
+  text-align: center;
+}
+
+.recognition-card h3 {
+  color: #d81b60;
+  margin-top: 0;
+}
+
+.recognition-card p {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
