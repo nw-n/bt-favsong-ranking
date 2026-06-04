@@ -245,6 +245,29 @@ bothLikeButton.addEventListener("click", () => {
   finishOneMatch();
 });
 
+undoButton.addEventListener("click", () => {
+  if (!lastState) {
+    alert("戻せる選択がありません");
+    return;
+  }
+
+  songs.forEach((song, index) => {
+    song.rating = lastState.ratings[index];
+    song.unknownCount = lastState.unknownCounts[index];
+  });
+
+  matchCount = lastState.matchCount;
+  currentLeft = lastState.left;
+  currentRight = lastState.right;
+
+  leftSong.textContent = currentLeft.name;
+  rightSong.textContent = currentRight.name;
+
+  updateProgress();
+
+  lastState = null;
+});
+
 backToTopGame.addEventListener("click", () => {
 
   const ok = confirm(
