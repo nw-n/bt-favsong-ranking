@@ -62,13 +62,15 @@ h1 {
   word-break: break-word;
 }
 
+.song-button {
+  flex-direction: column;
+}
+
 .song-rating {
+  display: block;
   margin-top: 8px;
-
   font-size: 0.9rem;
-
   color: #c77d92;
-
   font-weight: normal;
 }
 
