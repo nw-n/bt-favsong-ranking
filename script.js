@@ -10,6 +10,8 @@ const recognition = document.getElementById("recognition");
 const leftSong = document.getElementById("leftSong");
 const rightSong = document.getElementById("rightSong");
 
+const superLikeLeftButton =　document.getElementById("superLikeLeft");
+const superLikeRightButton =　document.getElementById("superLikeRight");
 const skipButton = document.getElementById("skip");
 const unknownLeftButton = document.getElementById("unknownLeft");
 const unknownRightButton = document.getElementById("unknownRight");
@@ -182,6 +184,18 @@ rightSong.addEventListener("click", () => {
 
 skipButton.addEventListener("click", () => {
   nextMatch();
+});
+
+superLikeLeftButton.addEventListener("click", () => {
+  updateElo(currentLeft, currentRight);
+  currentLeft.rating += 15;
+  finishOneMatch();
+});
+
+superLikeRightButton.addEventListener("click", () => {
+  updateElo(currentRight, currentLeft);
+  currentRight.rating += 15;
+  finishOneMatch();
 });
 
 unknownLeftButton.addEventListener("click", () => {
