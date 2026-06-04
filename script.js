@@ -37,16 +37,27 @@ const songs = [
 ];
 
 function nextMatch() {
-  currentLeft = songs[Math.floor(Math.random() * songs.length)];
+  currentLeft =
+    songs[Math.floor(Math.random() * songs.length)];
 
-  do {
-    currentRight = songs[Math.floor(Math.random() * songs.length)];
-  } while (currentRight.name === currentLeft.name);
+  const candidates = songs
+    .filter(song => song.name !== currentLeft.name)
+    .sort((a, b) =>
+      Math.abs(a.rating - currentLeft.rating) -
+      Math.abs(b.rating - currentLeft.rating)
+    );
+
+  const topCandidates =
+    candidates.slice(0, Math.min(5, candidates.length));
+
+  currentRight =
+    topCandidates[
+      Math.floor(Math.random() * topCandidates.length)
+    ];
 
   leftSong.textContent = currentLeft.name;
   rightSong.textContent = currentRight.name;
 }
-
 function updateProgress() {
   progressText.textContent = `${matchCount} / ${MAX_MATCHES}`;
 
