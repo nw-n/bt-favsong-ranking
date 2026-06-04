@@ -27,6 +27,17 @@ h1 {
   font-family: "M PLUS Rounded 1c", sans-serif;
 }
 
+.title-main {
+  display: block;
+  font-size: 2.4rem;
+  letter-spacing: 3px;
+}
+
+.title-sub {
+  display: block;
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
 .subtitle {
   text-align: center;
   color: #888;
