@@ -5,6 +5,7 @@ const startButton = document.getElementById("startButton");
 const resultScreen = document.getElementById("result-screen");
 const top3 = document.getElementById("top3");
 const fullRanking = document.getElementById("full-ranking");
+const recognition = document.getElementById("recognition");
 
 const leftSong = document.getElementById("leftSong");
 const rightSong = document.getElementById("rightSong");
@@ -83,12 +84,26 @@ function showResults() {
   resultScreen.style.display = "block";
 
   top3.innerHTML = `
-    <h3>🥇 ${sortedSongs[0].name}</h3>
-    <h3>🥈 ${sortedSongs[1].name}</h3>
-    <h3>🥉 ${sortedSongs[2].name}</h3>
-  `;
+  <h3>🥇 ${sortedSongs[0].name}</h3>
+  <h3>🥈 ${sortedSongs[1].name}</h3>
+  <h3>🥉 ${sortedSongs[2].name}</h3>
+`;
 
-  let rankingHTML = "";
+const knownSongs =
+  songs.filter(song => song.unknownCount === 0).length;
+
+const recognitionRate =
+  (knownSongs / songs.length) * 100;
+
+recognition.innerHTML = `
+  <div class="recognition-card">
+    <h3>📊 認知率</h3>
+    <p>${knownSongs} / ${songs.length} 曲</p>
+    <p>${recognitionRate.toFixed(1)}%</p>
+  </div>
+`;
+
+let rankingHTML = "";
 
   for (let i = 3; i < Math.min(20, sortedSongs.length); i++) {
     rankingHTML += `
