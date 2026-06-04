@@ -160,12 +160,20 @@ let rankingHTML = "";
     `;
 
     for (let i = 20; i < sortedSongs.length; i++) {
-      rankingHTML += `
-        <p>
-          ${i + 1}位　
-          ${sortedSongs[i].name}
-        </p>
-      `;
+     rankingHTML += `
+  <p class="ranking-row">
+
+    <span>
+      ${i + 1}位
+      ${sortedSongs[i].name}
+    </span>
+
+    <span>
+      ${Math.round(sortedSongs[i].rating)}
+    </span>
+
+  </p>
+`;
     }
 
     rankingHTML += `
