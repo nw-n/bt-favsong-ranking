@@ -74,6 +74,12 @@ h1 {
   padding: 12px;
   font-size: 0.95rem;
   cursor: pointer;
+  
+  #unknownLeft,
+  #unknownRight,
+  #unknownBoth {
+  background: #e8f4ff;
+  color: #4a90e2;
 }
 
 .sub-buttons button:hover {
