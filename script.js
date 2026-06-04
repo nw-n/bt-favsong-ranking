@@ -59,8 +59,20 @@ function nextMatch() {
       Math.floor(Math.random() * topCandidates.length)
     ];
 
-  leftSong.textContent = currentLeft.name;
-  rightSong.textContent = currentRight.name;
+ leftSong.innerHTML = `
+  ${currentLeft.name}
+  <div class="song-rating">
+    ⭐ ${Math.round(currentLeft.rating)}
+  </div>
+`;
+
+rightSong.innerHTML = `
+  ${currentRight.name}
+  <div class="song-rating">
+    ⭐ ${Math.round(currentRight.rating)}
+  </div>
+`;
+  
 }
 function updateProgress() {
   progressText.textContent = `${matchCount} / ${MAX_MATCHES}`;
