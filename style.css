@@ -60,10 +60,9 @@ h1 {
 
 
 .sub-buttons {
-  margin-top: 24px;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .sub-buttons button {
@@ -74,12 +73,26 @@ h1 {
   padding: 12px;
   font-size: 0.95rem;
   cursor: pointer;
-  
-  #unknownLeft,
-  #unknownRight,
-  #unknownBoth {
+}
+
+#bothLike,
+#draw,
+#unknownBoth,
+#skip {
+  width: 100%;
+}
+
+#unknownLeft,
+#unknownRight {
+  width: calc(50% - 6px);
+}
+
+#unknownLeft,
+#unknownRight,
+#unknownBoth {
   background: #e8f4ff;
   color: #4a90e2;
+  border-color: #b8dcff;
 }
 
 .sub-buttons button:hover {
