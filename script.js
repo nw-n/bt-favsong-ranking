@@ -24,6 +24,7 @@ const progressText = document.getElementById("progress-text");
 const progressFill = document.getElementById("progress-fill");
 
 const backToTopGame = document.getElementById("backToTopGame");
+const copyResultButton = document.getElementById("copyResultButton");
 const backToStart = document.getElementById("backToStart");
 
 let lastState = null;
@@ -358,6 +359,19 @@ backToTopGame.addEventListener("click", () => {
   resultScreen.style.display = "none";
   gameScreen.style.display = "none";
   startScreen.style.display = "block";
+});
+
+copyResultButton.addEventListener("click", () => {
+  const sortedSongs = [...songs].sort((a, b) => b.rating - a.rating);
+  const text =
+    "BULLET TRAIN Favorite Song Ranking\n\n" +
+    sortedSongs
+      .map((song, index) => `${index + 1}位 ${song.name}`)
+      .join("\n");
+
+  navigator.clipboard.writeText(text);
+
+  alert("結果をコピーしました！");
 });
 
 backToStart.addEventListener("click", () => {
