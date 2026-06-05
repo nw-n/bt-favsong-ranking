@@ -113,24 +113,24 @@ function showResults() {
 
   top3.innerHTML = `
   <h3>
-    🥇 ${sortedSongs[0].name}
-    <span class="top-rating">
-      ⭐ ${Math.round(sortedSongs[0].rating)}
-    </span>
-  </h3>
+  🥇 ${sortedSongs[0].name}
+  <div class="top-rating">
+    ⭐ ${Math.round(sortedSongs[0].rating)}
+  </div>
+ </h3>
 
   <h3>
     🥈 ${sortedSongs[1].name}
-    <span class="top-rating">
+    <div class="top-rating">
       ⭐ ${Math.round(sortedSongs[1].rating)}
-    </span>
+    </div>
   </h3>
 
   <h3>
     🥉 ${sortedSongs[2].name}
-    <span class="top-rating">
+    <div class="top-rating">
       ⭐ ${Math.round(sortedSongs[2].rating)}
-    </span>
+    </div>
   </h3>
 `;
 
