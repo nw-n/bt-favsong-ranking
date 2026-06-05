@@ -158,6 +158,8 @@ function showResults() {
   const knownSongs = songs.filter(song => song.unknownCount === 0).length;
   const recognitionRate = (knownSongs / songs.length) * 100;
 
+  const unknownSongs = songs.filter(song => song.unknownCount > 0);
+
   recognition.innerHTML = `
     <div class="recognition-card">
       <h3>📊 認知率</h3>
@@ -199,7 +201,59 @@ function showResults() {
 
   const showMoreButton = document.getElementById("showMoreRanking");
   const moreRanking = document.getElementById("more-ranking");
+  const showUnknownButton = document.getElementById("showUnknownSongs");
+  const unknownSongsList = document.getElementById("unknownSongsList");
 
+  if (unknownSongs.length > 0) {
+
+  let unknownHTML = `
+    <hr>
+
+    <h3>📝 「わからない」を選択した曲リスト</h3>
+
+    <button id="showUnknownSongs">
+      もっと表示
+    </button>
+
+    <div
+      id="unknownSongsList"
+      style="display:none;"
+    >
+  `;
+
+  unknownSongs.forEach(song => {
+
+    unknownHTML += `
+      <p>${song.name}</p>
+    `;
+
+  });
+
+  unknownHTML += `
+    </div>
+  `;
+
+  fullRanking.innerHTML += unknownHTML;
+}
+  if (
+  showUnknownButton &&
+  unknownSongsList
+) {
+
+  showUnknownButton.addEventListener(
+    "click",
+    () => {
+
+      unknownSongsList.style.display =
+        "block";
+
+      showUnknownButton.style.display =
+        "none";
+
+    }
+  );
+
+}
   if (showMoreButton && moreRanking) {
     showMoreButton.addEventListener("click", () => {
       moreRanking.style.display = "block";
