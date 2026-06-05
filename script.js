@@ -25,6 +25,7 @@ const progressFill = document.getElementById("progress-fill");
 
 const backToTopGame = document.getElementById("backToTopGame");
 const copyResultButton = document.getElementById("copyResultButton");
+const shareXButton = document.getElementById("shareXButton");
 const backToStart = document.getElementById("backToStart");
 
 let lastState = null;
@@ -372,6 +373,25 @@ copyResultButton.addEventListener("click", () => {
   navigator.clipboard.writeText(text);
 
   alert("結果をコピーしました！");
+});
+
+shareXButton.addEventListener("click", () => {
+  const sortedSongs = [...songs].sort((a, b) => b.rating - a.rating);
+
+  const text =
+    "BULLET TRAIN Favorite Song Ranking\n\n" +
+    sortedSongs
+      .slice(0, 10)
+      .map((song, index) => `${index + 1}位 ${song.name}`)
+      .join("\n");
+
+  const url = location.href;
+
+  const shareUrl =
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(text + "\n\n" + url);
+
+  window.open(shareUrl, "_blank");
 });
 
 backToStart.addEventListener("click", () => {
