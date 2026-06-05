@@ -58,6 +58,7 @@ h1 {
   cursor: pointer;
   white-space: normal;
   overflow-wrap: break-word;
+  flex-direction: column;
 
   word-break: break-word;
 }
