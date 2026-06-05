@@ -47,13 +47,20 @@ function displaySong(button, song) {
   `;
 }
 function getSelectableSongs() {
-  const knownSongs =
-    songs.filter(song => song.unknownCount === 0);
-  if (knownSongs.length >= 2) {
-    return knownSongs;
+  const selectableSongs = songs.filter(song => {
+    if (song.unknownCount === 0) {
+      return true;
+    }
+    return Math.random() < 0.2;
+  });
+
+  if (selectableSongs.length >= 2) {
+    return selectableSongs;
   }
+
   return songs;
 }
+
 function nextMatch() {
 
   const selectableSongs =
