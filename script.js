@@ -10,23 +10,23 @@ const recognition = document.getElementById("recognition");
 const leftSong = document.getElementById("leftSong");
 const rightSong = document.getElementById("rightSong");
 
-const superLikeLeftButton =　document.getElementById("superLikeLeft");
-const superLikeRightButton =　document.getElementById("superLikeRight");
+const superLikeLeftButton = document.getElementById("superLikeLeft");
+const superLikeRightButton = document.getElementById("superLikeRight");
 const skipButton = document.getElementById("skip");
 const unknownLeftButton = document.getElementById("unknownLeft");
 const unknownRightButton = document.getElementById("unknownRight");
 const unknownBothButton = document.getElementById("unknownBoth");
 const drawButton = document.getElementById("draw");
 const bothLikeButton = document.getElementById("bothLike");
-const undoButton =document.getElementById("undoButton");
+const undoButton = document.getElementById("undoButton");
 
 const progressText = document.getElementById("progress-text");
 const progressFill = document.getElementById("progress-fill");
 
-let lastState = null;
 const backToTopGame = document.getElementById("backToTopGame");
 const backToStart = document.getElementById("backToStart");
 
+let lastState = null;
 let MAX_MATCHES = 500;
 let matchCount = 0;
 let currentLeft;
@@ -40,9 +40,15 @@ const songs = [
   { name: "pani pani", rating: 1500, unknownCount: 0 }
 ];
 
+function displaySong(button, song) {
+  button.innerHTML = `
+    <div>${song.name}</div>
+    <div class="song-rating">⭐ ${Math.round(song.rating)}</div>
+  `;
+}
+
 function nextMatch() {
-  currentLeft =
-    songs[Math.floor(Math.random() * songs.length)];
+  currentLeft = songs[Math.floor(Math.random() * songs.length)];
 
   const candidates = songs
     .filter(song => song.name !== currentLeft.name)
@@ -51,32 +57,17 @@ function nextMatch() {
       Math.abs(b.rating - currentLeft.rating)
     );
 
-  const topCandidates =
-    candidates.slice(0, Math.min(5, candidates.length));
+  const topCandidates = candidates.slice(0, Math.min(5, candidates.length));
 
   currentRight =
-    topCandidates[
-      Math.floor(Math.random() * topCandidates.length)
-    ];
+    topCandidates[Math.floor(Math.random() * topCandidates.length)];
 
- leftSong.innerHTML = `
-  ${currentLeft.name}
-  <div class="song-rating">
-    ⭐ ${Math.round(currentLeft.rating)}
-  </div>
-`;
-
-rightSong.innerHTML = `
-  ${currentRight.name}
-  <div class="song-rating">
-    ⭐ ${Math.round(currentRight.rating)}
-  </div>
-`;
-  
+  displaySong(leftSong, currentLeft);
+  displaySong(rightSong, currentRight);
 }
+
 function updateProgress() {
   progressText.textContent = `${matchCount} / ${MAX_MATCHES}`;
-
   const percent = (matchCount / MAX_MATCHES) * 100;
   progressFill.style.width = `${percent}%`;
 }
@@ -113,6 +104,7 @@ function finishOneMatch() {
     nextMatch();
   }
 }
+
 function showResults() {
   const sortedSongs = [...songs].sort((a, b) => b.rating - a.rating);
 
@@ -120,72 +112,55 @@ function showResults() {
   resultScreen.style.display = "block";
 
   top3.innerHTML = `
-    <h3>🥇 ${sortedSongs[0].name}</h3>
-    <h3>🥈 ${sortedSongs[1].name}</h3>
-    <h3>🥉 ${sortedSongs[2].name}</h3>
+    <h3>🥇 ${sortedSongs[0].name}　${Math.round(sortedSongs[0].rating)}</h3>
+    <h3>🥈 ${sortedSongs[1].name}　${Math.round(sortedSongs[1].rating)}</h3>
+    <h3>🥉 ${sortedSongs[2].name}　${Math.round(sortedSongs[2].rating)}</h3>
+  `;
+
+  const knownSongs = songs.filter(song => song.unknownCount === 0).length;
+  const recognitionRate = (knownSongs / songs.length) * 100;
+
+  recognition.innerHTML = `
+    <div class="recognition-card">
+      <h3>📊 認知率</h3>
+      <p>${knownSongs} / ${songs.length} 曲</p>
+      <p>${recognitionRate.toFixed(1)}%</p>
+    </div>
   `;
 
   let rankingHTML = "";
 
   for (let i = 3; i < Math.min(20, sortedSongs.length); i++) {
     rankingHTML += `
-      <p>
-        ${i + 1}位　
-        ${sortedSongs[i].name}
+      <p class="ranking-row">
+        <span>${i + 1}位　${sortedSongs[i].name}</span>
+        <span>${Math.round(sortedSongs[i].rating)}</span>
       </p>
     `;
   }
 
-  fullRanking.innerHTML = rankingHTML;
-}
-
-const knownSongs =
-  songs.filter(song => song.unknownCount === 0).length;
-
-const recognitionRate =
-  (knownSongs / songs.length) * 100;
-
-recognition.innerHTML = `
-  <div class="recognition-card">
-    <h3>📊 認知率</h3>
-    <p>${knownSongs} / ${songs.length} 曲</p>
-    <p>${recognitionRate.toFixed(1)}%</p>
-  </div>
-`;
-
-  }
-
   if (sortedSongs.length > 20) {
     rankingHTML += `
-      <button id="showMoreRanking">
-        もっと表示
-      </button>
-
+      <button id="showMoreRanking">もっと表示</button>
       <div id="more-ranking" style="display:none;">
     `;
 
     for (let i = 20; i < sortedSongs.length; i++) {
-     rankingHTML += `
-  rankingHTML += `
-  <p class="ranking-row">
-    <span>${i + 1}位　${sortedSongs[i].name}</span>
-    <span>${Math.round(sortedSongs[i].rating)}</span>
-  </p>
-`;
+      rankingHTML += `
+        <p class="ranking-row">
+          <span>${i + 1}位　${sortedSongs[i].name}</span>
+          <span>${Math.round(sortedSongs[i].rating)}</span>
+        </p>
+      `;
     }
 
-    rankingHTML += `
-      </div>
-    `;
+    rankingHTML += `</div>`;
   }
 
   fullRanking.innerHTML = rankingHTML;
 
-  const showMoreButton =
-    document.getElementById("showMoreRanking");
-
-  const moreRanking =
-    document.getElementById("more-ranking");
+  const showMoreButton = document.getElementById("showMoreRanking");
+  const moreRanking = document.getElementById("more-ranking");
 
   if (showMoreButton && moreRanking) {
     showMoreButton.addEventListener("click", () => {
@@ -213,11 +188,6 @@ rightSong.addEventListener("click", () => {
   finishOneMatch();
 });
 
-skipButton.addEventListener("click", () => {
-  saveState();
-  nextMatch();
-});
-
 superLikeLeftButton.addEventListener("click", () => {
   saveState();
   updateElo(currentLeft, currentRight);
@@ -230,6 +200,10 @@ superLikeRightButton.addEventListener("click", () => {
   updateElo(currentRight, currentLeft);
   currentRight.rating += 15;
   finishOneMatch();
+});
+
+skipButton.addEventListener("click", () => {
+  nextMatch();
 });
 
 unknownLeftButton.addEventListener("click", () => {
@@ -278,26 +252,20 @@ undoButton.addEventListener("click", () => {
   currentLeft = lastState.left;
   currentRight = lastState.right;
 
-  leftSong.textContent = currentLeft.name;
-  rightSong.textContent = currentRight.name;
+  displaySong(leftSong, currentLeft);
+  displaySong(rightSong, currentRight);
 
   updateProgress();
-
   lastState = null;
 });
 
 backToTopGame.addEventListener("click", () => {
-
-  const ok = confirm(
-    "ランキングを中断してトップに戻りますか？"
-  );
-
+  const ok = confirm("ランキングを中断してトップに戻りますか？");
   if (!ok) return;
 
   resultScreen.style.display = "none";
   gameScreen.style.display = "none";
   startScreen.style.display = "block";
-
 });
 
 backToStart.addEventListener("click", () => {
@@ -321,6 +289,12 @@ startButton.addEventListener("click", () => {
 
   MAX_MATCHES = Number(selectedDifficulty.value);
   matchCount = 0;
+  lastState = null;
+
+  songs.forEach(song => {
+    song.rating = 1500;
+    song.unknownCount = 0;
+  });
 
   startScreen.style.display = "none";
   resultScreen.style.display = "none";
