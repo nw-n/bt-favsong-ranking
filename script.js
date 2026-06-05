@@ -112,10 +112,27 @@ function showResults() {
   resultScreen.style.display = "block";
 
   top3.innerHTML = `
-    <h3>🥇 ${sortedSongs[0].name}　${Math.round(sortedSongs[0].rating)}</h3>
-    <h3>🥈 ${sortedSongs[1].name}　${Math.round(sortedSongs[1].rating)}</h3>
-    <h3>🥉 ${sortedSongs[2].name}　${Math.round(sortedSongs[2].rating)}</h3>
-  `;
+  <h3>
+    🥇 ${sortedSongs[0].name}
+    <span class="top-rating">
+      ⭐ ${Math.round(sortedSongs[0].rating)}
+    </span>
+  </h3>
+
+  <h3>
+    🥈 ${sortedSongs[1].name}
+    <span class="top-rating">
+      ⭐ ${Math.round(sortedSongs[1].rating)}
+    </span>
+  </h3>
+
+  <h3>
+    🥉 ${sortedSongs[2].name}
+    <span class="top-rating">
+      ⭐ ${Math.round(sortedSongs[2].rating)}
+    </span>
+  </h3>
+`;
 
   const knownSongs = songs.filter(song => song.unknownCount === 0).length;
   const recognitionRate = (knownSongs / songs.length) * 100;
