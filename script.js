@@ -120,10 +120,24 @@ function showResults() {
   resultScreen.style.display = "block";
 
   top3.innerHTML = `
-  <h3>🥇 ${sortedSongs[0].name}</h3>
-  <h3>🥈 ${sortedSongs[1].name}</h3>
-  <h3>🥉 ${sortedSongs[2].name}</h3>
-`;
+    <h3>🥇 ${sortedSongs[0].name}</h3>
+    <h3>🥈 ${sortedSongs[1].name}</h3>
+    <h3>🥉 ${sortedSongs[2].name}</h3>
+  `;
+
+  let rankingHTML = "";
+
+  for (let i = 3; i < Math.min(20, sortedSongs.length); i++) {
+    rankingHTML += `
+      <p>
+        ${i + 1}位　
+        ${sortedSongs[i].name}
+      </p>
+    `;
+  }
+
+  fullRanking.innerHTML = rankingHTML;
+}
 
 const knownSongs =
   songs.filter(song => song.unknownCount === 0).length;
@@ -139,15 +153,6 @@ recognition.innerHTML = `
   </div>
 `;
 
-let rankingHTML = "";
-
-  for (let i = 3; i < Math.min(20, sortedSongs.length); i++) {
-    rankingHTML += `
-  <p class="ranking-row">
-    <span>${i + 1}位　${sortedSongs[i].name}</span>
-    <span>${Math.round(sortedSongs[i].rating)}</span>
-  </p>
-`;
   }
 
   if (sortedSongs.length > 20) {
