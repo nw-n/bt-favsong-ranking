@@ -46,11 +46,25 @@ function displaySong(button, song) {
     <div class="song-rating">⭐ ${Math.round(song.rating)}</div>
   `;
 }
-
+function getSelectableSongs() {
+  const knownSongs =
+    songs.filter(song => song.unknownCount === 0);
+  if (knownSongs.length >= 2) {
+    return knownSongs;
+  }
+  return songs;
+}
 function nextMatch() {
-  currentLeft = songs[Math.floor(Math.random() * songs.length)];
 
-  const candidates = songs
+  const selectableSongs =
+    getSelectableSongs();
+
+  currentLeft =
+    selectableSongs[
+      Math.floor(Math.random() * selectableSongs.length)
+    ];
+
+  const candidates = selectableSongs
     .filter(song => song.name !== currentLeft.name)
     .sort((a, b) =>
       Math.abs(a.rating - currentLeft.rating) -
