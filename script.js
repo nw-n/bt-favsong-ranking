@@ -203,57 +203,63 @@ function showResults() {
 
   const showMoreButton = document.getElementById("showMoreRanking");
   const moreRanking = document.getElementById("more-ranking");
-  const showUnknownButton = document.getElementById("showUnknownSongs");
-  const unknownSongsList = document.getElementById("unknownSongsList");
 
-  if (unknownSongs.length > 0) {
-
+if (unknownSongs.length > 0) {
   let unknownHTML = `
-    <hr>
+    <section class="unknown-songs-section">
+      <hr>
 
-    <h3>📝 「わからない」を選択した曲リスト</h3>
+      <h3>📝 「わからない」を選択した曲リスト</h3>
 
-    <button id="showUnknownSongs">
-      もっと表示
-    </button>
+      <button
+        type="button"
+        class="show-more-btn"
+        id="showUnknownSongs"
+      >
+        <span class="show-more-text">もっと表示</span>
+        <span class="show-more-icon" aria-hidden="true">⌄</span>
+      </button>
 
-    <div
-      id="unknownSongsList"
-      style="display:none;"
-    >
+      <div id="unknownSongsList" style="display:none;">
   `;
 
   unknownSongs.forEach(song => {
-
     unknownHTML += `
       <p>${song.name}</p>
     `;
-
   });
 
   unknownHTML += `
-    </div>
+      </div>
+    </section>
   `;
 
   fullRanking.innerHTML += unknownHTML;
+
+  const showUnknownButton =
+    document.getElementById("showUnknownSongs");
+
+  const unknownSongsList =
+    document.getElementById("unknownSongsList");
+
+  showUnknownButton.addEventListener("click", () => {
+    const isOpen =
+      unknownSongsList.style.display === "block";
+
+    unknownSongsList.style.display =
+      isOpen ? "none" : "block";
+
+    showUnknownButton.querySelector(
+      ".show-more-text"
+    ).textContent =
+      isOpen ? "もっと表示" : "閉じる";
+
+    showUnknownButton.querySelector(
+      ".show-more-icon"
+    ).textContent =
+      isOpen ? "⌄" : "⌃";
+  });
 }
-  if (
-  showUnknownButton &&
-  unknownSongsList
-) {
-
-  showUnknownButton.addEventListener(
-    "click",
-    () => {
-
-      unknownSongsList.style.display =
-        "block";
-
-      showUnknownButton.style.display =
-        "none";
-
-    }
-  );
 
 }
   if (showMoreButton && moreRanking) {
