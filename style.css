@@ -345,6 +345,10 @@ h1 {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 }
 
 .show-more-btn:hover {
@@ -352,9 +356,8 @@ h1 {
 }
 
 .show-more-icon {
-  display: inline-block;
-  margin-left: 6px;
   font-size: 16px;
+  transform: translateY(-1px);
 }
 .ranking-row {
   display: flex;
