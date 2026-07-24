@@ -261,7 +261,6 @@ if (unknownSongs.length > 0) {
   });
 }
 
-}
   if (showMoreButton && moreRanking) {
     showMoreButton.addEventListener("click", () => {
       moreRanking.style.display = "block";
